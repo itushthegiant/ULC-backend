@@ -3,8 +3,9 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, viewsets
+from rest_framework.authentication import TokenAuthentication
 
-from . import serializers, models
+from . import serializers, models, permissions
 
 
 class HelloApiView(APIView):
@@ -58,7 +59,7 @@ class HelloViewSet(viewsets.ViewSet):
     """Test API ViewSet"""
     serializer_class = serializers.HelloSerializer
 
-    def list(slef, request):
+    def list(self, request):
         """Return a hello message"""
         a_viewset = [
             'Uses actions (list, create, retrieve, update, partial_update)',
@@ -100,6 +101,8 @@ class HelloViewSet(viewsets.ViewSet):
 
 
 class UserProfileViewSet(viewsets.ModelViewSet):
-    """Hanlde creating and updating profiles"""
+    """Handle creating and updating profiles"""
     serializer_class = serializers.UserProfileSerializer
     queryset = models.UserProfile.objects.all()
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (permissions.UpdateOwnProfile,)
