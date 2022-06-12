@@ -5,9 +5,9 @@ from . import models
 
 
 
-class HelloSerializer(serializers.Serializer):
-    """Serializes a name field testing our APIView"""
-    name = serializers.CharField(max_length=10)
+# class HelloSerializer(serializers.Serializer):
+#     """Serializes a name field testing our APIView"""
+#     name = serializers.CharField(max_length=10)
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
@@ -15,7 +15,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.UserProfile
-        fields = ('id', 'email', 'name', 'password')
+        fields = ('id', 'email', 'first_name', 'password')
         extra_kwargs = {
             'password': {
                 'write_only': True,
@@ -27,7 +27,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         """Create and return a new user"""
         user = models.UserProfile.objects.create_user(
             email=validated_data['email'],
-            name=validated_data['name'],
+            name=validated_data['first_name'],
             password=validated_data['password']
         )
 
