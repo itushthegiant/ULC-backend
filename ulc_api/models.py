@@ -1,3 +1,4 @@
+from email.headerregistry import Address
 from typing import List
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
@@ -60,15 +61,16 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
         return self.email
 
 
-# class ProfileFeedItem(models.Model):
-#     """Profile status update"""
-#     user_profile = models.ForeignKey(
-#         settings.AUTH_USER_MODEL,
-#         on_delete=models.CASCADE
-#     )
-#     status_text = models.CharField(max_length=255)
-#     created_on = models.DateTimeField(auto_now_add=True)
+class Property(models.Model):
+    """Property of user"""
+    user_profile = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
+    name = models.CharField(max_length=255)
+    address = models.CharField(max_length=255)
+    created_on = models.DateTimeField(auto_now_add=True)
 
-#     def __str__(self):
-#         """Return the model as a string"""
-#         return self.status_text
+    def __str__(self):
+        """Return the model as a string"""
+        return self.name

@@ -37,10 +37,10 @@ class UserProfileSerializer(serializers.ModelSerializer):
         return super().update(instance, validated_data)
 
 
-# class ProfileFeedItemSerializer(serializers.ModelSerializer):
-#     """Serializes profile feed items"""
+class PropertySerializer(serializers.ModelSerializer):
+    """Serializes properties"""
 
-#     class Meta:
-#         model = models.ProfileFeedItem
-#         fields = ('id', 'user_profile', 'status_text', 'created_on')
-#         extra_kwargs = {'user_profile': {'read_only': True}}
+    class Meta:
+        model = models.Property
+        fields = ('id', 'user_profile', 'name', 'address', 'created_on')
+        extra_kwargs = {'user_profile': {'read_only': True}}
