@@ -82,6 +82,7 @@ class Unit(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE
     )
+    property_id = models.ForeignKey(Property, on_delete=models.CASCADE)
     number = models.CharField(max_length=100)
     unit_status = models.CharField(max_length=100)
     condition = models.CharField(max_length=100)

@@ -22,7 +22,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         """Create and return a new user"""
         user = models.UserProfile.objects.create_user(
             email=validated_data['email'],
-            name=validated_data['first_name'],
+            first_name=validated_data['first_name'],
             password=validated_data['password']
         )
 
@@ -60,5 +60,6 @@ class UnitSerializer(serializers.ModelSerializer):
             'condition',
             'market_price',
             'sqft',
+            'property_id',
             )
         extra_kwargs = {'user_profile': {'read_only': True}}
