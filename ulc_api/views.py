@@ -31,7 +31,20 @@ class PropertyViewSet(viewsets.ModelViewSet):
     authentication_classes = (TokenAuthentication,)
     serializer_class = serializers.PropertySerializer
     queryset = models.Property.objects.all()
-    permission_classes = (permissions.UpdateOwnStatus, IsAuthenticated)
+    permission_classes = (permissions.UpdateOwnObject, IsAuthenticated)
+    
+    def perform_create(self, serializer):
+        """Sets the user profile to the logged in user"""
+        serializer.save(user_profile=self.request.user)
+
+
+
+class UnitViewSet(viewsets.ModelViewSet):
+    """Handles creating, reading and updating Units"""
+    authentication_classes = (TokenAuthentication,)
+    serializer_class = serializers.UnitSerializer
+    queryset = models.Unit.objects.all()
+    permission_classes = (permissions.UpdateOwnObject, IsAuthenticated)
     
     def perform_create(self, serializer):
         """Sets the user profile to the logged in user"""

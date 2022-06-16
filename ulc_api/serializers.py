@@ -44,3 +44,21 @@ class PropertySerializer(serializers.ModelSerializer):
         model = models.Property
         fields = ('id', 'user_profile', 'name', 'address', 'created_on')
         extra_kwargs = {'user_profile': {'read_only': True}}
+
+
+
+class UnitSerializer(serializers.ModelSerializer):
+    """Serializes Units"""
+
+    class Meta:
+        model = models.Unit
+        fields = (
+            'id',
+            'number',
+            'unit_status',
+            'operational_status',
+            'condition',
+            'market_price',
+            'sqft',
+            )
+        extra_kwargs = {'user_profile': {'read_only': True}}

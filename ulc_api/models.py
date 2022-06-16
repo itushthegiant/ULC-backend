@@ -74,3 +74,21 @@ class Property(models.Model):
     def __str__(self):
         """Return the model as a string"""
         return self.name
+
+
+class Unit(models.Model):
+    """Unit of user"""
+    user_profile = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
+    number = models.CharField(max_length=100)
+    unit_status = models.CharField(max_length=100)
+    condition = models.CharField(max_length=100)
+    operational_status = models.CharField(max_length=100)
+    sqft = models.IntegerField
+    market_price = models.IntegerField
+
+    def __str__(self):
+        """Return the model as a string"""
+        return self.number
